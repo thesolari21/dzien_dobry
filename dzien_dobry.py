@@ -1,5 +1,4 @@
 import requests
-import json
 import re
 import datetime
 from bs4 import BeautifulSoup
@@ -13,6 +12,17 @@ def joke():
     joke_text = joke.text
     joke_text = joke_text[:-16]
     return joke_text
+
+def english_word():
+    r = requests.get('https://www.diki.pl/dictionary/word-of-the-day')
+    soup = BeautifulSoup(r.text, 'lxml')
+    frame = soup.find('div',class_='dictionaryEntity')
+    word = frame.find_all('a',class_='plainLink')
+    word = word[0].text + ' - '+ word[1].text
+    example_sentence = frame.find('div',class_='exampleSentence').text.strip().replace('   ','')
+
+    word = word + '<br><br>' + example_sentence
+    return word
 
 def wiselka():
     r = requests.get('https://www.wislaportal.pl')
@@ -47,6 +57,12 @@ def weather():
 
     return temp_max,temp_min, sunrise, sunset
 
+def weather_icon():
+    r = requests.get('https://pogoda.onet.pl/prognoza-pogody/dabrowa-281445')
+    soup = BeautifulSoup(r.text, 'lxml')
+    src = soup.find('div', class_ = 'forecast').find('img')
+    return ('https:'+src['src'])
+
 def name_day():
     r = requests.get('https://www.kalbi.pl/')
     soup = BeautifulSoup(r.text, 'lxml')
@@ -75,8 +91,9 @@ if __name__ == "__main__":
     unusual_holidays = unusual_holidays()
     temp_max, temp_min, sunrise, sunset = weather()
     matches = wiselka()
-
+    word = english_word()
     day_of_week, pl_date = date_today()
+    src_icon = weather_icon()
 
-    send_mail(day_of_week, pl_date, name_day, temp_max, temp_min, sunrise, sunset, unusual_holidays, joke, matches)
+    send_mail(day_of_week, pl_date, name_day, src_icon, temp_max, temp_min, sunrise, sunset, unusual_holidays, joke, matches, word)
 

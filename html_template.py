@@ -125,7 +125,7 @@ header = """
     	background: #ffffff;
     }
     .bg_light{
-    	background: #f7fafa;
+    	background: #d4e3e3;
     }
     .bg_black{
     	background: #000000;
@@ -135,39 +135,6 @@ header = """
     }
     .email-section{
     	padding:2.5em;
-    }
-
-    /*BUTTON*/
-    .btn{
-    	padding: 10px 15px;
-    	display: inline-block;
-    }
-    .btn.btn-primary{
-    	border-radius: 5px;
-    	background: #17bebb;
-    	color: #ffffff;
-    }
-    .btn.btn-white{
-    	border-radius: 5px;
-    	background: #ffffff;
-    	color: #000000;
-    }
-    .btn.btn-white-outline{
-    	border-radius: 5px;
-    	background: transparent;
-    	border: 1px solid #fff;
-    	color: #fff;
-    }
-    .btn.btn-black-outline{
-    	border-radius: 0px;
-    	background: transparent;
-    	border: 2px solid #000;
-    	color: #000;
-    	font-weight: 700;
-    }
-    .btn-custom{
-    	color: rgba(0,0,0,.3);
-    	text-decoration: underline;
     }
 
     h1,h2,h3,h4,h5,h6{
@@ -319,7 +286,7 @@ body="""
                 	<tr>
                 		<td style="padding: 0 2.5em; text-align: left;">
                 			<div class="text">
-                				<h4>Dziś mamy {} ({}). Imieniny obchodzą: <br><i> {} </i> <p> A ponadto...</h4>
+                				<h4>Dziś mamy {} ({}). <p> Imieniny obchodzą: <i> {} </i> <p> A ponadto...</h4>
                 			</div>
                 		</td>
                 	</tr>
@@ -330,12 +297,12 @@ body="""
     	      <tr>
     	      	<table class="bg_white" role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
     					  <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
-    					  		<td valign="middle" style="text-align:left; padding: 0 2.5em;" width = "20%"><img src="https://i.ibb.co/vzSGT6J/weather.jpg" width="100%" height="100%"</td>
+    					  		<td valign="middle" style="text-align:left; padding: 0 2.5em;" width = "20%"><img src="{}" width="100%" height="100%"</td>
     							<td width = "80%"> <h4><b> Pogoda </b></h4> 
     							<p>Temp max: {} C<p> Temp min: {} C<p>Wschód Słońca: {}<p> Zachód Słońca: {}</td>
     					  </tr>
     					   <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
-    					  		<td valign="middle" style="text-align:left; padding: 0 2.5em;" width = "20%"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwbdf-I_KjfOjyZgdLdWg33fIlrW_vuPy5Aw&usqp=CAU" width="100%" height="100%" </td>
+    					  		<td valign="middle" style="text-align:left; padding: 0 2.5em;" width = "20%"><img src="https://img.redro.pl/plakaty/fajerwerki-wektorowa-ilustracja-na-bialym-tle-odosobniona-plaska-ikona-ilustracja-fajerwerki-z-nikt-400-149917096.jpg" width="100%" height="100%" </td>
     							<td width = "80%"> <h4><b> Święta </b></h4> <p>{}</td>
     					  </tr>
     					  <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
@@ -361,7 +328,7 @@ body="""
                         <tr>
                           <td style="text-align: left; padding-right: 10px;">
                           	<h3 class="heading">Angol na dziś</h3>
-                          	<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p> 	
+                          	<p>{}</p> 	
 
                           </td>
                         </tr>
@@ -373,10 +340,10 @@ body="""
                           <td style="text-align: left; padding-left: 10px;">
                           	<h3 class="heading">Linki</h3>
                           	<ul>
-    					                <li><a href="#">Pogoda</a></li>
-    					                <li><a href="#">Wiadomości</a></li>
+    					                <li><a href="https://www.accuweather.com/pl/pl/dąbrowa/2663947/weather-forecast/2663947">Pogoda</a></li>
+    					                <li><a href="https://news.google.com/topstories?hl=pl&gl=PL&ceid=PL:pl">Wiadomości</a></li>
     					                <li><a href="#">Kalendarium</a></li>
-    					                <li><a href="#">WislaPortal</a></li>
+    					                <li><a href="https://www.wislaportal.pl">WislaPortal</a></li>
     					              </ul>
                           </td>
                         </tr>
