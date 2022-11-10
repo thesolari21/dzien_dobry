@@ -286,7 +286,7 @@ body="""
                 	<tr>
                 		<td style="padding: 0 2.5em; text-align: left;">
                 			<div class="text">
-                				<h4>Dziś mamy {} ({}). <p> Imieniny obchodzą: <i> {} </i> <p> A ponadto...</h4>
+                				<h4>Dziś mamy {day_of_week} ({pl_date}). <p> Imieniny obchodzą: <i> {name_day} </i> <p> A ponadto...</h4>
                 			</div>
                 		</td>
                 	</tr>
@@ -297,21 +297,21 @@ body="""
     	      <tr>
     	      	<table class="bg_white" role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
     					  <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
-    					  		<td valign="middle" style="text-align:left; padding: 0 2.5em;" width = "20%"><img src="{}" width="100%" height="100%"</td>
+    					  		<td valign="middle" style="text-align:left; padding: 0 2.5em;" width = "20%"><img src="{src_icon}" width="100%" height="100%"</td>
     							<td width = "80%"> <h4><b> Pogoda </b></h4> 
-    							<p>Temp max: {} C<p> Temp min: {} C<p>Wschód Słońca: {}<p> Zachód Słońca: {}</td>
+    							<p>Temp max: {temp_max} C<p> Temp min: {temp_min} C<p>Wschód Słońca: {sunrise}<p> Zachód Słońca: {sunset}</td>
     					  </tr>
     					   <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
     					  		<td valign="middle" style="text-align:left; padding: 0 2.5em;" width = "20%"><img src="https://img.redro.pl/plakaty/fajerwerki-wektorowa-ilustracja-na-bialym-tle-odosobniona-plaska-ikona-ilustracja-fajerwerki-z-nikt-400-149917096.jpg" width="100%" height="100%" </td>
-    							<td width = "80%"> <h4><b> Święta </b></h4> <p>{}</td>
+    							<td width = "80%"> <h4><b> Nietypowe święta </b></h4> <p>{unusual_holidays}</td>
     					  </tr>
     					  <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
     					  		<td valign="middle" style="text-align:left; padding: 0 2.5em;" width = "20%"> <img src ="https://i.ibb.co/hRCfFCS/suchar.jpg" width="100%" height="100%" </td>
-    							<td width = "80%"> <h4><b> Suchar dnia </b></h4> <p>{}</td>
+    							<td width = "80%"> <h4><b> Suchar dnia </b></h4> <p>{joke}</td>
     					  </tr>
     					  <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
     					  		<td valign="middle" style="text-align:left; padding: 0 2.5em;" width = "20%"> <img src ="https://media.istockphoto.com/vectors/white-star-on-red-circle-icon-or-symbol-vector-id1129175098?k=20&m=1129175098&s=170667a&w=0&h=8BWEFUtmeEAZ0anDtpVDtdqMQ3goJWWYuM2xpXAvLZ0=" width="100%" height="100%" </td>
-    							<td width = "80%"> <h4><b> Najbliższe mecze Wisełki </b></h4> {}</td>
+    							<td width = "80%"> <h4><b> Najbliższe mecze Wisełki </b></h4> {matches}</td>
     					  </tr>
 
     	      	</table>
@@ -328,7 +328,7 @@ body="""
                         <tr>
                           <td style="text-align: left; padding-right: 10px;">
                           	<h3 class="heading">Angol na dziś</h3>
-                          	<p>{}</p> 	
+                          	<p>{word}</p> 	
 
                           </td>
                         </tr>
@@ -340,9 +340,9 @@ body="""
                           <td style="text-align: left; padding-left: 10px;">
                           	<h3 class="heading">Linki</h3>
                           	<ul>
-    					                <li><a href="https://www.accuweather.com/pl/pl/dąbrowa/2663947/weather-forecast/2663947">Pogoda</a></li>
+    					                <li><a href="https://m.meteo.pl/dopiewo/60">Pogoda</a></li>
     					                <li><a href="https://news.google.com/topstories?hl=pl&gl=PL&ceid=PL:pl">Wiadomości</a></li>
-    					                <li><a href="#">Kalendarium</a></li>
+    					                <li><a href="https://www.pepper.pl">Pepper</a></li>
     					                <li><a href="https://www.wislaportal.pl">WislaPortal</a></li>
     					              </ul>
                           </td>
