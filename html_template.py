@@ -302,8 +302,12 @@ body="""
     							<p>Temp max: {temp_max} C<p> Temp min: {temp_min} C<p>Wschód Słońca: {sunrise}<p> Zachód Słońca: {sunset}</td>
     					  </tr>
     					   <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
-    					  		<td valign="middle" style="text-align:left; padding: 0 2.5em;" width = "20%"><img src="https://img.redro.pl/plakaty/fajerwerki-wektorowa-ilustracja-na-bialym-tle-odosobniona-plaska-ikona-ilustracja-fajerwerki-z-nikt-400-149917096.jpg" width="100%" height="100%" </td>
+    					  		<td valign="middle" style="text-align:left; padding: 0 2.5em;" width = "20%"><img src="https://icons.iconarchive.com/icons/fasticon/nature/256/Red-Flower-icon.png" width="100%" height="100%" </td>
     							<td width = "80%"> <h4><b> Nietypowe święta </b></h4> <p>{unusual_holidays}</td>
+    					  </tr>
+    					   <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
+    					  		<td valign="middle" style="text-align:left; padding: 0 2.5em;" width = "20%"><img src="https://i.pinimg.com/originals/6e/09/90/6e099088b3deb805b68d83676af6f067.png" width="100%" height="100%" </td>
+    							<td width = "80%"> <h4><b> Kalendarz Google</b></h4> <p>{events_calendar}</td>
     					  </tr>
     					  <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
     					  		<td valign="middle" style="text-align:left; padding: 0 2.5em;" width = "20%"> <img src ="https://i.ibb.co/hRCfFCS/suchar.jpg" width="100%" height="100%" </td>

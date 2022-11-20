@@ -2,12 +2,18 @@ import requests
 import re
 import datetime
 import logging
+import quickstart
 from bs4 import BeautifulSoup
 from v_email import send_mail
 
+# logging start app, end app, errors
 logging.basicConfig(filename='app.log', filemode='a', format='%(asctime)s - %(message)s', level=logging.INFO)
 
 def joke():
+    """
+    Get random joke from web piszsuchary.pl
+    :return: str
+    """
     try:
         r = requests.get('http://piszsuchary.pl/losuj')
         soup = BeautifulSoup(r.text, 'lxml')
@@ -21,6 +27,10 @@ def joke():
 
 
 def english_word():
+    """
+    Get english word of the day with translate and example
+    :return: str
+    """
     try:
         r = requests.get('https://www.diki.pl/dictionary/word-of-the-day')
         soup = BeautifulSoup(r.text, 'lxml')
@@ -36,9 +46,16 @@ def english_word():
 
 
 def wiselka():
+    """
+    Get next matches of Wisla Krakow from wislaportal.pl
+    :return: str
+    """
     try:
         r = requests.get('https://www.wislaportal.pl')
+
+        #polish chars
         r.encoding = "iso-8859-2"
+
         soup = BeautifulSoup(r.text, 'lxml')
         frame = soup.find(text=re.compile('NAJBLIŻSZE')).next_element.next_element
         matches = frame.find_all('li')
@@ -54,6 +71,10 @@ def wiselka():
 
 
 def unusual_holidays():
+    """
+    Get unsusual holidays
+    :return: str
+    """
     try:
         r = requests.get('https://www.kalbi.pl/kalendarz-swiat-nietypowych')
         soup = BeautifulSoup(r.text, 'lxml')
@@ -61,7 +82,7 @@ def unusual_holidays():
 
         holidays_text = ''
         for holiday in holidays:
-            holidays_text = holidays_text + str(holiday.text) + '<br>'
+            holidays_text = holidays_text + str(holiday.text) + '<p>'
 
         return holidays_text
     except Exception as e:
@@ -69,6 +90,11 @@ def unusual_holidays():
 
 
 def weather():
+    """
+    Get weather by API open-meteo.com
+    Docs: https://open-meteo.com/en/docs
+    :return: str
+    """
     try:
         r = requests.get('https://api.open-meteo.com/v1/forecast?latitude=52.392051&longitude=16.790847&&timezone=auto&daily=temperature_2m_max&daily=temperature_2m_min&daily=sunrise&daily=sunset&daily=sunrise&daily=precipitation_sum&daily=weathercode').json()
         temp_max = r['daily']['temperature_2m_max'][0]
@@ -82,6 +108,10 @@ def weather():
 
 
 def weather_icon():
+    """
+    Get weather icon. API dont return picture. Must be another function
+    :return: str (address to picture)
+    """
     try:
         r = requests.get('https://pogoda.onet.pl/prognoza-pogody/dabrowa-281445')
         soup = BeautifulSoup(r.text, 'lxml')
@@ -92,13 +122,17 @@ def weather_icon():
         logging.exception('Weather icon function problem')
 
 def name_day():
+    """
+    Get nameday - first 3.
+    :return: str
+    """
     try:
         r = requests.get('https://www.kalbi.pl/')
         soup = BeautifulSoup(r.text, 'lxml')
 
         name_day = soup.find('section', class_='calCard-name-day').find_all('a')
         name_day_text = ''
-        for name in name_day[:5]:
+        for name in name_day[:3]:
             name_day_text = name_day_text + name.text + ', '
 
         name_day_text = name_day_text[:-2]
@@ -108,6 +142,10 @@ def name_day():
         logging.exception('Name day function problem')
 
 def date_today():
+    """
+    Get name of day and date
+    :return: str
+    """
     try:
         days = {"0": "niedzielę", "1": "poniedziałek", "2": "wtorek", "3": "środę", "4": "czwartek", "5": "piątek", "6": "sobotę"}
         number = datetime.datetime.today().strftime("%w")
@@ -120,6 +158,9 @@ def date_today():
 
 
 if __name__ == "__main__":
+    """
+    Main function. Call next fuctions, assign to the variables and send mail (html content).
+    """
     try:
         logging.info('Run script')
 
@@ -132,7 +173,10 @@ if __name__ == "__main__":
         day_of_week, pl_date = date_today()
         src_icon = weather_icon()
 
-        send_mail(day_of_week, pl_date, name_day, src_icon, temp_max, temp_min, sunrise, sunset, unusual_holidays, joke, matches, word)
+        # direct from tutorial Google - https://developers.google.com/calendar/api/quickstart/python
+        events_calendar = quickstart.get_calendar()
+
+        send_mail(day_of_week, pl_date, name_day, src_icon, temp_max, temp_min, sunrise, sunset, unusual_holidays, joke, matches, word, events_calendar)
         logging.info('Done')
     except Exception as e:
         logging.exception('Main function problem')
