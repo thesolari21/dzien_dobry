@@ -261,7 +261,7 @@ header = """
     </head>"""
 
 body="""
-    <body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f1f1f1;">
+	<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f1f1f1;">
     	<center style="width: 100%; background-color: #f1f1f1;">
         <div style="display: none; font-size: 1px;max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
           &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
@@ -317,53 +317,34 @@ body="""
     					  		<td valign="middle" style="text-align:left; padding: 0 2.5em;" width = "20%"> <img src ="https://media.istockphoto.com/vectors/white-star-on-red-circle-icon-or-symbol-vector-id1129175098?k=20&m=1129175098&s=170667a&w=0&h=8BWEFUtmeEAZ0anDtpVDtdqMQ3goJWWYuM2xpXAvLZ0=" width="100%" height="100%" </td>
     							<td width = "80%"> <h4><b> Najbliższe mecze Wisełki </b></h4> {matches}</td>
     					  </tr>
-
+    					   <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
+    					  		<td valign="middle" style="text-align:left; padding: 0 2.5em;" width = "20%"> <img src ="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/great-britain-flag-design-template-14940c4b6c32036e7bb4da922eb4aadb_screen.jpg?ts=1624701025" width="100%" height="100%" </td>
+    							<td width = "80%"> <h4><b> Angielski na dziś </b></h4> {word}<p></td>
+    					  </tr>
     	      	</table>
     	      </tr><!-- end tr -->
           <!-- 1 Column Text + Button : END -->
           </table>
-          <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
-          	<tr>
-              <td valign="middle" class="bg_light footer email-section">
-                <table>
-                	<tr>
-                    <td valign="top" width="66.666%" style="padding-top: 20px;">
-                      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                        <tr>
-                          <td style="text-align: left; padding-right: 10px;">
-                          	<h3 class="heading">Angol na dziś</h3>
-                          	<p>{word}</p> 	
-
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                    <td valign="top" width="33.333%" style="padding-top: 20px;">
-                      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                        <tr>
-                          <td style="text-align: left; padding-left: 10px;">
-                          	<h3 class="heading">Linki</h3>
-                          	<ul>
-    					                <li><a href="https://m.meteo.pl/dopiewo/60">Pogoda</a></li>
-    					                <li><a href="https://news.google.com/topstories?hl=pl&gl=PL&ceid=PL:pl">Wiadomości</a></li>
-    					                <li><a href="https://www.pepper.pl">Pepper</a></li>
-    					                <li><a href="https://www.wislaportal.pl">WislaPortal</a></li>
-    					              </ul>
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-                </table>
+		<table align="center" role="presentation" cellspacing="0" cellpadding="0" border="2" width="100%" style="margin: auto;">
+              <td valign="middle" class="bg_light footer email-section" style='padding: 1em';>
+                <img src="{garfield}" style='height: 100%; width: 100%; object-fit: contain'>
               </td>
             </tr><!-- end: tr -->
+			</table>
+			
+		<table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
+          	<tr> <td valign="middle" class="bg_light footer email-section" style='padding: 1em';><a href="https://m.meteo.pl/dopiewo/60">Pogoda</a></td>
+			<td valign="middle" class="bg_light footer email-section" style='padding: 1em';><a href="https://news.google.com/topstories?hl=pl&gl=PL&ceid=PL:pl">Wiadomości</a></td>
+			<td valign="middle" class="bg_light footer email-section" style='padding: 1em';><a href="https://www.pepper.pl">Pepper</a></td>
+			<td valign="middle" class="bg_light footer email-section" style='padding: 1em';><a href="https://www.wislaportal.pl">WislaPortal</a></td></tr>
+		</table>
+		<table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">	
             <tr>
               <td class="bg_white" style="text-align: center;">
               	<p>Mail design by https://github.com/ColorlibHQ/</p>
               </td>
             </tr>
           </table>
-
         </div>
       </center>
     </body>

@@ -44,7 +44,7 @@ def get_calendar():
         now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
         to = (datetime.datetime.utcnow()  + datetime.timedelta(days=3)).isoformat() + 'Z'  # 'Z' indicates UTC time
 
-        calendars = [('Bartek','primary'),('Ania','liliana89ana@gmail.com'),('RDabrowa','rachunkidabrowa@gmail.com')]
+        calendars = [('name_of_your_calendar','primary'),('label','mail_of_calendar'),('label','name_of_calendar')]
         calendars_text = ''
 
         for calendar in calendars:

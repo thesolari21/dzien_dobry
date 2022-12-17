@@ -2,7 +2,7 @@ import smtplib, ssl,logging
 from email.message import EmailMessage
 import html_template as ht
 
-def send_mail(day_of_week, pl_date, name_day, src_icon, temp_max, temp_min, sunrise, sunset, unusual_holidays, joke, matches, word, events_calendar):
+def send_mail(day_of_week, pl_date, name_day, src_icon, temp_max, temp_min, sunrise, sunset, unusual_holidays, joke, matches, word, events_calendar,garfield):
     """
     send mail html injecting the received variables into the template.
     Template in html_template file.
@@ -17,7 +17,7 @@ def send_mail(day_of_week, pl_date, name_day, src_icon, temp_max, temp_min, sunr
 
         #need to be devided, problem with read css tags when injects python variables
         header_html = ht.header
-        body_html = ht.body.format(day_of_week=day_of_week, pl_date=pl_date, name_day=name_day, src_icon=src_icon, temp_max=temp_max, temp_min=temp_min, sunrise=sunrise, sunset=sunset, unusual_holidays=unusual_holidays, joke=joke, matches=matches, word=word, events_calendar = events_calendar)
+        body_html = ht.body.format(day_of_week=day_of_week, pl_date=pl_date, name_day=name_day, src_icon=src_icon, temp_max=temp_max, temp_min=temp_min, sunrise=sunrise, sunset=sunset, unusual_holidays=unusual_holidays, joke=joke, matches=matches, word=word, events_calendar = events_calendar, garfield = garfield)
         content = header_html + body_html
 
         msg = EmailMessage()

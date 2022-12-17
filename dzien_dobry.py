@@ -1,3 +1,4 @@
+import google.auth.exceptions
 import requests
 import re
 import datetime
@@ -25,6 +26,21 @@ def joke():
     except Exception as e:
         logging.exception('Joke function problem')
 
+
+def garfield():
+    """
+    Get random comic of garfield from https://www.bgreco.net/garfield/
+    :return: str
+    """
+    try:
+        r = requests.get('https://www.bgreco.net/garfield/')
+        r.encoding = 'ISO-8859-1'
+        soup = BeautifulSoup(r.content, 'lxml')
+        garfield = soup.find('a')['href']
+
+        return garfield
+    except Exception as e:
+        logging.exception('Mem function problem')
 
 def english_word():
     """
@@ -172,11 +188,16 @@ if __name__ == "__main__":
         word = english_word()
         day_of_week, pl_date = date_today()
         src_icon = weather_icon()
+        garfield = garfield()
 
         # direct from tutorial Google - https://developers.google.com/calendar/api/quickstart/python
         events_calendar = quickstart.get_calendar()
 
-        send_mail(day_of_week, pl_date, name_day, src_icon, temp_max, temp_min, sunrise, sunset, unusual_holidays, joke, matches, word, events_calendar)
+        send_mail(day_of_week, pl_date, name_day, src_icon, temp_max, temp_min, sunrise, sunset, unusual_holidays, joke, matches, word, events_calendar,garfield)
         logging.info('Done')
+
+    except google.auth.exceptions.RefreshError as re:
+        logging.exception('Wygasl token API Google Calendar')
+
     except Exception as e:
         logging.exception('Main function problem')
