@@ -20,7 +20,8 @@ Python script. It collects information from various websites and then sends it i
 Everything in one place, you dont have to click on different websites every day.
 	
 ## Screens
-![Screen](https://i.ibb.co/BZwmG34/obraz-2022-12-17-215359047.png "Screen")
+![](https://i.ibb.co/J5Ky7qg/dzien-dobry1.jpg)
+![](https://i.ibb.co/SxS3mPp/dzien-dobry2.jpg)
 
 ### To Do
 * Add interesting football matches according to the users preferences
