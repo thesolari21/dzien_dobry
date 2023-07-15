@@ -33,10 +33,10 @@ def garfield():
     :return: str
     """
     try:
-        r = requests.get('https://www.bgreco.net/garfield/')
+        r = requests.get('https://www.gocomics.com/random/garfield')
         r.encoding = 'ISO-8859-1'
         soup = BeautifulSoup(r.content, 'lxml')
-        garfield = soup.find('a')['href']
+        garfield = soup.find('div',class_='comic__container').find('img', class_='img-fluid')['src']
 
         return garfield
     except Exception as e:
@@ -133,7 +133,7 @@ def weather_icon():
         soup = BeautifulSoup(r.text, 'lxml')
         src = soup.find('div', class_='forecast').find('img')
 
-        return 'https:'+src['src']
+        return src['src']
     except Exception as e:
         logging.exception('Weather icon function problem')
 
