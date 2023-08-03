@@ -29,7 +29,7 @@ def joke():
 
 def garfield():
     """
-    Get random comic of garfield from https://www.bgreco.net/garfield/
+    Get random comic of garfield from https://www.gocomics.com/random/garfield
     :return: str
     """
     try:
@@ -129,9 +129,9 @@ def weather_icon():
     :return: str (address to picture)
     """
     try:
-        r = requests.get('https://pogoda.onet.pl/prognoza-pogody/dabrowa-281445')
+        r = requests.get('https://mapapogodowa.pl/103984-dabrowa-prognoza-16dni')
         soup = BeautifulSoup(r.text, 'lxml')
-        src = soup.find('div', class_='forecast').find('img')
+        src = soup.find('img')
 
         return src['src']
     except Exception as e:

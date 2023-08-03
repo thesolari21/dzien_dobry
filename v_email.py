@@ -1,6 +1,7 @@
 import smtplib, ssl,logging
 from email.message import EmailMessage
 import html_template as ht
+import json
 
 def send_mail(day_of_week, pl_date, name_day, src_icon, temp_max, temp_min, sunrise, sunset, unusual_holidays, joke, matches, word, events_calendar,garfield):
     """
@@ -8,12 +9,16 @@ def send_mail(day_of_week, pl_date, name_day, src_icon, temp_max, temp_min, sunr
     Template in html_template file.
     :return: None
     """
+
+    with open('config.json','r') as f:
+        config = json.load(f)
+
     try:
-        port = 465  # For SSL
-        smtp_server = ""
-        sender_email = ""
-        receiver_email = [""]
-        password = ""
+        port = config['port']  # For SSL
+        smtp_server = config['smtp_server']
+        sender_email = config['sender_email']
+        receiver_email = config['receiver_email']
+        password = config['password']
 
         #need to be devided, problem with read css tags when injects python variables
         header_html = ht.header

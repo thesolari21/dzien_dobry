@@ -21,7 +21,7 @@ def get_calendar():
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
-    # Notice Solari: for automatic tasks, use the absolute path, e.g. /home/jjbg/solari_scripts/dzien_dobry/token.json
+    # Notice Solari: for automatic tasks, use the absolute path, e.g. /home/jjbg/skrypty_solari/dzien_dobry/token.json
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
     # If there are no (valid) credentials available, let the user log in.
@@ -29,7 +29,7 @@ def get_calendar():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-    # Notice Solari: for automatic tasks, use the absolute path, e.g. /home/jjbg/solari_scripts/dzien_dobry/credentials.json
+    # Notice Solari: for automatic tasks, use the absolute path, e.g. /home/jjbg/skrypty_solari/dzien_dobry/credentials.json
             flow = InstalledAppFlow.from_client_secrets_file(
                 'credentials.json', SCOPES)
             creds = flow.run_local_server(port=0)
@@ -44,7 +44,7 @@ def get_calendar():
         now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
         to = (datetime.datetime.utcnow()  + datetime.timedelta(days=3)).isoformat() + 'Z'  # 'Z' indicates UTC time
 
-        calendars = [('name_of_your_calendar','primary'),('label','mail_of_calendar'),('label','name_of_calendar')]
+        calendars = [('Bartek','primary'),('Ania','liliana89ana@gmail.com'),('RDabrowa','rachunkidabrowa@gmail.com')]
         calendars_text = ''
 
         for calendar in calendars:
