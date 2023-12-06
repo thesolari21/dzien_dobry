@@ -6,6 +6,7 @@ import logging
 import quickstart
 from bs4 import BeautifulSoup
 from v_email import send_mail
+import base64
 
 # logging start app, end app, errors
 logging.basicConfig(filename='app.log', filemode='a', format='%(asctime)s - %(message)s', level=logging.INFO)
@@ -16,11 +17,10 @@ def joke():
     :return: str
     """
     try:
-        r = requests.get('http://piszsuchary.pl/losuj')
+        r = requests.get('https://www.dowciplandia.pl/losowe')
         soup = BeautifulSoup(r.text, 'lxml')
-        joke = soup.find('pre', class_='tekst-pokaz')
+        joke = soup.find('span', id='bodydowcip')
         joke_text = joke.text
-        joke_text = joke_text[:-16]
 
         return joke_text
     except Exception as e:
@@ -67,7 +67,7 @@ def wiselka():
     :return: str
     """
     try:
-        r = requests.get('https://www.wislaportal.pl')
+        r = requests.get('https://www.wislaportal.pl', verify=False)
 
         #polish chars
         r.encoding = "iso-8859-2"
@@ -123,20 +123,6 @@ def weather():
         logging.exception('Weather function problem')
 
 
-def weather_icon():
-    """
-    Get weather icon. API dont return picture. Must be another function
-    :return: str (address to picture)
-    """
-    try:
-        r = requests.get('https://mapapogodowa.pl/103984-dabrowa-prognoza-16dni')
-        soup = BeautifulSoup(r.text, 'lxml')
-        src = soup.find('img')
-
-        return src['src']
-    except Exception as e:
-        logging.exception('Weather icon function problem')
-
 def name_day():
     """
     Get nameday - first 3.
@@ -187,13 +173,12 @@ if __name__ == "__main__":
         matches = wiselka()
         word = english_word()
         day_of_week, pl_date = date_today()
-        src_icon = weather_icon()
         garfield = garfield()
 
         # direct from tutorial Google - https://developers.google.com/calendar/api/quickstart/python
         events_calendar = quickstart.get_calendar()
 
-        send_mail(day_of_week, pl_date, name_day, src_icon, temp_max, temp_min, sunrise, sunset, unusual_holidays, joke, matches, word, events_calendar,garfield)
+        send_mail(day_of_week, pl_date, name_day, temp_max, temp_min, sunrise, sunset, unusual_holidays, joke, matches, word, events_calendar,garfield)
         logging.info('Done')
 
     except google.auth.exceptions.RefreshError as re:

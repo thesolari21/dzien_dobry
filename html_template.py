@@ -297,7 +297,7 @@ body="""
     	      <tr>
     	      	<table class="bg_white" role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
     					  <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
-    					  		<td valign="middle" style="text-align:left; padding: 0 2.5em;" width = "20%"><img src="{src_icon}" width="100%" height="100%"</td>
+    					  		<td valign="middle" style="text-align:left; padding: 0 2.5em;" width = "20%"><img src="https://img.freepik.com/premium-wektory/globus-ziemi-z-kontynentami-i-oceanami-ikona-swiata-lub-planety_254685-1570.jpg?w=740" width="100%" height="100%"</td>
     							<td width = "80%"> <h4><b> Pogoda </b></h4> 
     							<p>Temp max: {temp_max} C<p> Temp min: {temp_min} C<p>Wschód Słońca: {sunrise}<p> Zachód Słońca: {sunset}</td>
     					  </tr>
