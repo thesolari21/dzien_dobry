@@ -6,21 +6,46 @@ import logging
 import quickstart
 from bs4 import BeautifulSoup
 from v_email import send_mail
-import base64
+import json
+import openai
 
 # logging start app, end app, errors
 logging.basicConfig(filename='app.log', filemode='a', format='%(asctime)s - %(message)s', level=logging.INFO)
 
+
+
 def joke():
     """
-    Get random joke from web piszsuchary.pl
+    Get random joke by ChatGPT
     :return: str
     """
     try:
-        r = requests.get('https://www.dowciplandia.pl/losowe')
-        soup = BeautifulSoup(r.text, 'lxml')
-        joke = soup.find('span', id='bodydowcip')
-        joke_text = joke.text
+
+        with open('config.json', 'r') as f:
+            config = json.load(f)
+
+        openai.api_key = config['api_key']
+
+
+        response = openai.chat.completions.create(
+            messages=[
+                {"role": "system",
+                 "content": "Opowiedz żart nie dłuższy niż na 200 znaków, za każdym razem inny kiedy Cię o to poproszę."
+                            "Skup się na polskich żartach ponieważ te tłumaczone nie zawsze są dobrze zrozumiane",
+                 }
+            ],
+            model="gpt-3.5-turbo",
+            # temperature= 0.8,
+            # max_tokens = 100,
+            # top_p= 0.9,
+            # frequency_penalty= 1
+            # presence_penalty= 0.5,
+        )
+
+        #print(response.choices[0].message.content)
+        #print(response.usage.total_tokens)
+
+        joke_text = response.choices[0].message.content
 
         return joke_text
     except Exception as e:
@@ -73,7 +98,7 @@ def wiselka():
         r.encoding = "iso-8859-2"
 
         soup = BeautifulSoup(r.text, 'lxml')
-        frame = soup.find(text=re.compile('NAJBLIŻSZE')).next_element.next_element
+        frame = soup.find(text=re.compile('NAJBLIŻSZY')).next_element.next_element
         matches = frame.find_all('li')
 
         matches_text = ''
