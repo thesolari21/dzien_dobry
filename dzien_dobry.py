@@ -30,8 +30,8 @@ def joke():
         response = openai.chat.completions.create(
             messages=[
                 {"role": "system",
-                 "content": "Opowiedz żart nie dłuższy niż na 200 znaków, za każdym razem inny kiedy Cię o to poproszę."
-                            "Skup się na polskich żartach ponieważ te tłumaczone nie zawsze są dobrze zrozumiane",
+                 "content": "Z strony https://piszsuchary.pl wybierz jeden losowy żart o ocenie powyżej 2.00 i mi go wyświetl."
+                            ,
                  }
             ],
             model="gpt-3.5-turbo",
@@ -47,6 +47,7 @@ def joke():
 
         joke_text = response.choices[0].message.content
 
+
         return joke_text
     except Exception as e:
         logging.exception('Joke function problem')
@@ -58,10 +59,10 @@ def garfield():
     :return: str
     """
     try:
-        r = requests.get('https://www.gocomics.com/random/garfield')
+        r = requests.get('https://www.gocomics.com/garfield')
         r.encoding = 'ISO-8859-1'
         soup = BeautifulSoup(r.content, 'lxml')
-        garfield = soup.find('div',class_='comic__container').find('img', class_='img-fluid')['src']
+        garfield = soup.find('img', class_='Comic_comic__image__6e_Fw Comic_comic__image_strip__hPLFq')['src']
 
         return garfield
     except Exception as e:
@@ -98,7 +99,7 @@ def wiselka():
         r.encoding = "iso-8859-2"
 
         soup = BeautifulSoup(r.text, 'lxml')
-        frame = soup.find(text=re.compile('NAJBLIŻSZY')).next_element.next_element
+        frame = soup.find(text=re.compile('NAJBLIŻSZ?')).next_element.next_element
         matches = frame.find_all('li')
 
         matches_text = ''
