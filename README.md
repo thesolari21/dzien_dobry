@@ -15,6 +15,7 @@ Python script. It collects information from various websites and then sends it i
 - integration with google calendars
 - Wisla Kraków matches
 - random joke
+- random werset from Bible
 - random garfield comic
 
 Everything in one place, you dont have to click on different websites every day.
@@ -47,3 +48,18 @@ Complete, working
 # 1.1
 * Add random Garfield comic
 * Changing the layout of the email template
+
+# 1.2
+* fix problem with Garfield comic
+
+# 1.3
+* New page with jokes
+* Fix problem with wislaportal
+
+# 1.4
+* Fix another problem with Garfield comic
+* Fix another problem with joke - different website
+* Fix another problem with Wisla Krakow matches - update source in web
+* Remove English word
+* Add random werset from Bible
+

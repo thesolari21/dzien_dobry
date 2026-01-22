@@ -1,13 +1,11 @@
 import google.auth.exceptions
 import requests
-import re
 import datetime
 import logging
 import quickstart
 from bs4 import BeautifulSoup
+import cloudscraper
 from v_email import send_mail
-import json
-import openai
 
 # logging start app, end app, errors
 logging.basicConfig(filename='app.log', filemode='a', format='%(asctime)s - %(message)s', level=logging.INFO)
@@ -16,39 +14,16 @@ logging.basicConfig(filename='app.log', filemode='a', format='%(asctime)s - %(me
 
 def joke():
     """
-    Get random joke by ChatGPT
+    Get joke from kinyen.pl
     :return: str
     """
     try:
+        r = requests.get('http://kinyen.pl/dowcipy/losowy/')
+        soup = BeautifulSoup(r.text, 'lxml')
+        joke = soup.find('div', class_='joke').get_text(strip=True)
 
-        with open('config.json', 'r') as f:
-            config = json.load(f)
+        return joke
 
-        openai.api_key = config['api_key']
-
-
-        response = openai.chat.completions.create(
-            messages=[
-                {"role": "system",
-                 "content": "Z strony https://piszsuchary.pl wybierz jeden losowy żart o ocenie powyżej 2.00 i mi go wyświetl."
-                            ,
-                 }
-            ],
-            model="gpt-3.5-turbo",
-            # temperature= 0.8,
-            # max_tokens = 100,
-            # top_p= 0.9,
-            # frequency_penalty= 1
-            # presence_penalty= 0.5,
-        )
-
-        #print(response.choices[0].message.content)
-        #print(response.usage.total_tokens)
-
-        joke_text = response.choices[0].message.content
-
-
-        return joke_text
     except Exception as e:
         logging.exception('Joke function problem')
 
@@ -59,32 +34,31 @@ def garfield():
     :return: str
     """
     try:
-        r = requests.get('https://www.gocomics.com/garfield')
-        r.encoding = 'ISO-8859-1'
-        soup = BeautifulSoup(r.content, 'lxml')
-        garfield = soup.find('img', class_='Comic_comic__image__6e_Fw Comic_comic__image_strip__hPLFq')['src']
+        url = 'https://www.gocomics.com/garfield'
+        scraper = cloudscraper.create_scraper()
+        html = scraper.get(url).text
+        soup = BeautifulSoup(html, 'lxml')
 
-        return garfield
+        img = soup.find("img", class_=lambda c: c and "Comic_comic__image__" in c)
+
+        return img["src"]
     except Exception as e:
         logging.exception('Mem function problem')
 
-def english_word():
+def bible():
     """
-    Get english word of the day with translate and example
+    Get random werset from Bible
     :return: str
     """
     try:
-        r = requests.get('https://www.diki.pl/dictionary/word-of-the-day')
+        r = requests.get('https://dailyverses.net/pl/losowy-werset-biblii/bw1975')
         soup = BeautifulSoup(r.text, 'lxml')
-        word = soup.find('div', class_='dictionaryEntity').find_all('a', class_='plainLink')
-        word = word[0].text + ' - ' + word[1].text
-        example_sentence = soup.find('div', class_='exampleSentence').text.strip().replace('   ', '')
-
-        word = word + '<br><br>' + example_sentence
+        word = soup.find('span', class_='v1').get_text()
+        word = word + '-' + soup.find('a', class_='vc').get_text()
 
         return word
     except Exception as e:
-        logging.exception('English word function problem')
+        logging.exception('Bible function problem')
 
 
 def wiselka():
@@ -96,16 +70,20 @@ def wiselka():
         r = requests.get('https://www.wislaportal.pl', verify=False)
 
         #polish chars
-        r.encoding = "iso-8859-2"
+        r.encoding = "utf-8"
 
         soup = BeautifulSoup(r.text, 'lxml')
-        frame = soup.find(text=re.compile('NAJBLIŻSZ?')).next_element.next_element
-        matches = frame.find_all('li')
+        frame = soup.find('div', class_='match-card-modern next-match')
 
-        matches_text = ''
-        for match in matches:
-            temp = match.text.replace("\n", "").replace(" ", "   ") + "<p>"
-            matches_text = matches_text + temp
+        date = frame.find('i', class_='fa fa-calendar-o').next_element.get_text()
+
+        teams_row = frame.find_all('div', recursive=False)[1]
+        cols = teams_row.find_all('div', recursive=False)
+        home_team = cols[0].get_text(strip=True)
+        away_team = cols[2].get_text(strip=True)
+
+        matches_text = date + home_team + "-" + away_team
+
 
         return matches_text
     except Exception as e:
@@ -197,7 +175,7 @@ if __name__ == "__main__":
         unusual_holidays = unusual_holidays()
         temp_max, temp_min, sunrise, sunset = weather()
         matches = wiselka()
-        word = english_word()
+        word = bible()
         day_of_week, pl_date = date_today()
         garfield = garfield()
 

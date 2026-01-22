@@ -318,8 +318,8 @@ body="""
     							<td width = "80%"> <h4><b> Najbliższe mecze Wisełki </b></h4> {matches}</td>
     					  </tr>
     					   <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
-    					  		<td valign="middle" style="text-align:left; padding: 0 2.5em;" width = "20%"> <img src ="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/great-britain-flag-design-template-14940c4b6c32036e7bb4da922eb4aadb_screen.jpg?ts=1624701025" width="100%" height="100%" </td>
-    							<td width = "80%"> <h4><b> Angielski na dziś </b></h4> {word}<p></td>
+    					  		<td valign="middle" style="text-align:left; padding: 0 2.5em;" width = "20%"> <img src ="https://www.iconpacks.net/icons/2/free-bible-icon-5007-thumb.png" width="100%" height="100%" </td>
+    							<td width = "80%"> <h4><b> Biblia na dziś </b></h4> {word}<p></td>
     					  </tr>
     	      	</table>
     	      </tr><!-- end tr -->
