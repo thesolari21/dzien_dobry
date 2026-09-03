@@ -39,7 +39,7 @@ def garfield():
         html = scraper.get(url).text
         soup = BeautifulSoup(html, 'lxml')
 
-        img = soup.find("img", class_=lambda c: c and "Comic_comic__image__" in c)
+        img = soup.select_one("img[class*='comic__image']")
 
         return img["src"]
     except Exception as e:
@@ -67,23 +67,25 @@ def wiselka():
     :return: str
     """
     try:
-        r = requests.get('https://www.wislaportal.pl', verify=False)
 
-        #polish chars
-        r.encoding = "utf-8"
+        url = 'https://wislazkrakowa.pl/kalendarz/terminarz/'
+        scraper = cloudscraper.create_scraper()
+        html = scraper.get(url).text
+        soup = BeautifulSoup(html, 'lxml')
 
-        soup = BeautifulSoup(r.text, 'lxml')
-        frame = soup.find('div', class_='match-card-modern next-match')
+        match = soup.select_one(".widget-game-result__item")
 
-        date = frame.find('i', class_='fa fa-calendar-o').next_element.get_text()
+        league = match.select_one(".widget-game-result__title").get_text(" ", strip=True)
 
-        teams_row = frame.find_all('div', recursive=False)[1]
-        cols = teams_row.find_all('div', recursive=False)
-        home_team = cols[0].get_text(strip=True)
-        away_team = cols[2].get_text(strip=True)
+        date = match.select_one(".widget-game-result__date")["datetime"]
+        date = datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S").strftime("%d.%m.%Y %H:%M")
 
-        matches_text = date + home_team + "-" + away_team
+        teams = match.select(".widget-game-result__team-name")
 
+        home_team = teams[0].get_text(strip=True)
+        away_team = teams[1].get_text(strip=True)
+
+        matches_text = date + " / "  + league + " / "  + home_team + "-" + away_team
 
         return matches_text
     except Exception as e:
